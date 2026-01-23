@@ -1388,30 +1388,34 @@ FUNCTION {calc.label}
   'label :=
 }
 
+FUNCTION {normalize.name.for.sort}       % expects: <name list> <index> on stack
+{
+  "{vv{ }}{ll{ }}{ f{ }}{ jj{ }}" format.name$  
+  purify$
+  sortify
+}
+
 FUNCTION {sort.format.names}
-{ 's :=
-  #1 'nameptr :=
-  ""
-  s num.names$ 'numnames :=
-  numnames 'namesleft :=
-    { namesleft #0 > }
-    { s nameptr
-      "{vv{ } }{ll{ }}{  f{ }}{  jj{ }}"
-      format.name$ 't :=
-      nameptr #1 >
-        {
-          "   "  *
-          namesleft #1 = t "others" = and
-            { "zzzzz" * }
-            { t sortify * }
-          if$
+{ 's :=                                  % full name list
+  s num.names$ 'numnames :=              % count of names
+
+  % Normalize first author and append to accumulator
+  s #1 normalize.name.for.sort
+  't :=
+
+  % Append group code and handle second author if needed
+  numnames #1 = 
+    { t "1" * 't := }                      % single author -> group 1
+    { numnames #2 = 
+        { t "2" * 't :=                    % two authors -> group 2
+          s #2 normalize.name.for.sort
+          t swap$ * 't :=                % append second author
         }
-        { t sortify * }
+        { t "3" * 't := }              % three or more authors -> group 3
       if$
-      nameptr #1 + 'nameptr :=
-      namesleft #1 - 'namesleft :=
     }
-  while$
+  if$
+  t                                      % return final sort string
 }
 
 FUNCTION {sort.format.title}
