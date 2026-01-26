@@ -1412,7 +1412,7 @@ FUNCTION {sort.format.names}
               s #2 normalize.name.for.sort
               t swap$ * 't :=                     % append second author
             }
-          id$
+          if$
         { t "3" * 't := }                         % three or more authors -> group 3
       if$
     }
