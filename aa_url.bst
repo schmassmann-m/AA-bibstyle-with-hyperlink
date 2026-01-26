@@ -1398,7 +1398,7 @@ FUNCTION {sort.format.names}
 { 's :=                                  % full name list
   s num.names$ 'numnames :=              % count of names
 
-  % Normalize first author and append to accumulator
+  % Normalize first author and initialize accumulator
   s #1 normalize.name.for.sort
   't :=
 
