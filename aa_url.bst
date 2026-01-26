@@ -1414,6 +1414,7 @@ FUNCTION {sort.format.names}
               t swap$ * 't :=                     % append second author
             }
           if$
+        }
         { t "3" * 't := }                         % three or more authors -> group 3
       if$
     }
