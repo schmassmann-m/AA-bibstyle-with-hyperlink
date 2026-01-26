@@ -1404,18 +1404,18 @@ FUNCTION {sort.format.names}
 
   % Append group code and handle second author if needed
   numnames #1 = 
-    { t "1" * 't := }                             % single author -> group 1
+    { t "   1   " * 't := }                       % single author -> group 1
     { numnames #2 = 
         { s #2 normalize.name.for.sort "others" =
-            { t "3" * 't := }                     % three or more authors -> group 3
+            { t "   3   " * 't := }               % three or more authors -> group 3
             { 
-              t "2" * 't :=                       % two authors -> group 2
+              t "   2   " * 't :=                 % two authors -> group 2
               s #2 normalize.name.for.sort
               t swap$ * 't :=                     % append second author
             }
           if$
         }
-        { t "3" * 't := }                         % three or more authors -> group 3
+        { t "   3   " * 't := }                   % three or more authors -> group 3
       if$
     }
   if$
