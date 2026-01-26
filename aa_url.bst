@@ -1391,7 +1391,6 @@ FUNCTION {calc.label}
 FUNCTION {normalize.name.for.sort}       % expects: <name list> <index> on stack
 {
   "{vv{ }}{ll{ }}{ f{ }}{ jj{ }}" format.name$  
-  purify$
   sortify
 }
 
