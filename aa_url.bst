@@ -1409,7 +1409,8 @@ FUNCTION {sort.format.names}
     { numnames #2 = 
         { s #2 normalize.name.for.sort "others" =
             { t "3" * 't := }                     % three or more authors -> group 3
-            { t "2" * 't :=                       % two authors -> group 2
+            { 
+              t "2" * 't :=                       % two authors -> group 2
               s #2 normalize.name.for.sort
               t swap$ * 't :=                     % append second author
             }
