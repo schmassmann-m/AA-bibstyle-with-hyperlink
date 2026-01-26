@@ -1046,8 +1046,15 @@ FUNCTION {format.journal}
 { journal empty$
     { "" }
     { doi empty$
-        { journal }
-        { "\href{http://dx.doi.org/" doi * "}{\color{magenta}" * journal * "}" * }
+        { adsurl empty$
+            { url empty$ 
+                { journal }
+                { "\href{" url * "}{\color{red}" * journal * "}" * }
+              if$
+            }
+           { journal }
+        }
+        { "\href{https://dx.doi.org/" doi * "}{\color{magenta}" * journal * "}" * }
       if$
     }
   if$
