@@ -1440,7 +1440,8 @@ FUNCTION {sort.format.names.tail}
         duplicate$ "others" = 
         numnames #5 >= i #4 = and
         or
-          { t "zzzz" * 't :=
+          { pop$                    % remove normalized current author from stack
+            t "zzzz" * 't :=
             numnames 'i :=          % exit loop
           }
           { 
