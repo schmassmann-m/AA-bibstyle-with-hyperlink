@@ -1422,6 +1422,40 @@ FUNCTION {sort.format.names}
   t                                               % return final sort string
 }
 
+FUNCTION {sort.format.names.tail}
+{ 's :=                             % full author list
+  s num.names$ 'numnames :=         % count authors
+
+  numnames #2 <=                    % group 1 & 2
+    { "" }                          % no tail
+    {
+      "" 't :=                      % accumulator
+      #2 'i :=                      % start with second author
+
+      { i numnames <= }             % while i <= numnames
+      { 
+        s i normalize.name.for.sort % normalize current author
+
+        % --- stop condition: (5+ authors after 3rd tail) OR "others" ---
+        duplicate$ "others" = 
+        numnames #5 >= i #4 = and
+        or
+          { t "zzzz" * 't :=
+            numnames 'i :=          % exit loop
+          }
+          { 
+            t swap$ * 't :=         % append normalized author
+          }
+        if$
+
+        i #1 + 'i :=                % increment
+      }
+      while$
+      t
+    }
+  if$
+}
+
 FUNCTION {sort.format.title}
 { 't :=
   "A " #2
@@ -1477,10 +1511,7 @@ FUNCTION {editor.sort}
 }
 
 FUNCTION {presort}
-{ calc.label
-  label sortify
-  "    "
-  *
+{ 
   type$ "book" =
   type$ "inbook" =
   or
@@ -1491,6 +1522,25 @@ FUNCTION {presort}
       if$
     }
   if$
+  calc.label
+  label sortify
+  *
+  "    "
+  *
+  type$ "book" =
+  type$ "inbook" =
+  or
+    { author empty$ 'editor 'author if$ }
+    { type$ "proceedings" = 
+        { editor } 
+        { author } 
+      if$ 
+    }
+  if$
+  sort.format.names.tail
+  *
+  "    "
+  *
   #1 entry.max$ substring$
   'sort.label :=
   sort.label
