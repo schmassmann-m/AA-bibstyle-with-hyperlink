@@ -1423,33 +1423,33 @@ FUNCTION {sort.format.names}
 }
 
 FUNCTION {sort.format.names.tail}
-{ 's :=                             % full author list
-  s num.names$ 'numnames :=         % count authors
+{ 's :=                                  % full author list
+  s num.names$ 'numnames :=               % count authors
 
-  numnames 3 <                      % group 1 & 2
-    { "" }                          % no tail
+  numnames 3 <                            % group 1 & 2
+    { "" }                                % no tail
     {
-      "" 't :=                      % accumulator
-      #2 'i :=                      % start with second author
+      "" 't :=                            % accumulator
+      #2 'nameptr :=                      % start with second author
 
-      { i   numnames 1 +    < }     % while i <= numnames
+      { nameptr   numnames #1 +    < }    % while nameptr <= numnames
       { 
-        s i normalize.name.for.sort % normalize current author
+        s nameptr normalize.name.for.sort % normalize current author
 
         % --- stop condition: (5+ authors after 3rd tail) OR "others" ---
-        numnames #4 >   i #4 =   and
         duplicate$ "others" = 
+        numnames #4 >   nameptr #4 =   and
         or
-          { pop$                    % remove normalized current author from stack
+          { pop$                          % remove normalized current author from stack
             t "zzzz" * 't :=
-            numnames 'i :=          % exit loop
+            numnames 'nameptr :=          % exit loop
           }
           { 
-            t swap$ * 't :=         % append normalized author
+            t swap$ * 't :=               % append normalized author
           }
         if$
 
-        i #1 + 'i :=                % increment
+        nameptr #1 + 'nameptr :=          % increment
       }
       while$
       t
