@@ -1426,19 +1426,19 @@ FUNCTION {sort.format.names.tail}
 { 's :=                             % full author list
   s num.names$ 'numnames :=         % count authors
 
-  numnames #2 <=                    % group 1 & 2
+  numnames 3 <                      % group 1 & 2
     { "" }                          % no tail
     {
       "" 't :=                      % accumulator
       #2 'i :=                      % start with second author
 
-      { i numnames <= }             % while i <= numnames
+      { i   numnames 1 +    < }     % while i <= numnames
       { 
         s i normalize.name.for.sort % normalize current author
 
         % --- stop condition: (5+ authors after 3rd tail) OR "others" ---
+        numnames #4 >   i #4 =   and
         duplicate$ "others" = 
-        numnames #5 >= i #4 = and
         or
           { pop$                    % remove normalized current author from stack
             t "zzzz" * 't :=
