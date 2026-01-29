@@ -1545,7 +1545,6 @@ FUNCTION {presort}
   #1 entry.max$ substring$
   'sort.label :=
   sort.label
-  *
   "    "
   *
   title field.or.null
