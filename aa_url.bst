@@ -1523,6 +1523,8 @@ FUNCTION {presort}
       if$
     }
   if$
+  "    "
+  *
   calc.label
   label sortify
   *
@@ -1539,8 +1541,6 @@ FUNCTION {presort}
     }
   if$
   sort.format.names.tail
-  *
-  "    "
   *
   #1 entry.max$ substring$
   'sort.label :=
