@@ -1426,7 +1426,7 @@ FUNCTION {sort.format.names.tail}
 { 's :=                                  % full author list
   s num.names$ 'numnames :=               % count authors
 
-  numnames 3 <                            % group 1 & 2
+  numnames #3 <                            % group 1 & 2
     { "" }                                % no tail
     {
       "" 't :=                            % accumulator
