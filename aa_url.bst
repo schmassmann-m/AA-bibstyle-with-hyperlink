@@ -1081,6 +1081,8 @@ FUNCTION {article}
     }
   if$
   adsurl empty$
+  pages empty$
+  or
     { format.journal.pages }
     { format.journal.pages adsurl make.href.hyperref }
   if$
