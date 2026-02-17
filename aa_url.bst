@@ -550,7 +550,7 @@ FUNCTION {format.eprint}
       "{" * 
       adsurl empty$
         { swap$ *}
-        { "\href{" adsurl * "}{\textcolor{blue}{" *
+        { "\href{" * adsurl * "}{\textcolor{blue}{" *
           swap$ *
           "}}" *
         }
