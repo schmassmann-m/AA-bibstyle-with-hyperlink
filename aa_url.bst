@@ -543,7 +543,7 @@ FUNCTION {format.eprint}
         { "[" * 
           archiveprefix "l" change.case$ "arxiv" =
             { "\href{https://arxiv.org/abs/" eprint * "}{\textcolor{magenta}{" * archiveprefix * "}}" * }
-            archiveprefix
+            { archiveprefix }
           if$
           * "]" * }
       if$
