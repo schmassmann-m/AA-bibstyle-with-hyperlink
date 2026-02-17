@@ -540,9 +540,22 @@ FUNCTION {format.eprint}
     { "[\eprint" 
       archiveprefix empty$
         'skip$
-        { "[" * archiveprefix * "]" * }
+        { "[" * 
+          archiveprefix "l" change.case$ "arxiv" =
+            { "\href{https://arxiv.org/abs/" eprint * "}{\textcolor{magenta}{" * archiveprefix * "}}" * }
+            archiveprefix
+          if$
+          * "]" * }
       if$
-      "{" * swap$ * "}]" *
+      "{" * 
+      adsurl empty$
+        { swap$ *}
+        { "\href{" adsurl * "}{\textcolor{blue}{" *
+          swap$ *
+          "}}" *
+        }
+      if$
+      "}]" *
     }
   if$
 }
