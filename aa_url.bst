@@ -1239,7 +1239,7 @@ FUNCTION {phdthesis}
   author format.key output
   format.date "year" output.check
   date.block
-  format.phdtitle adsurl make.href.hyperref output 
+  format.phdtitle output 
   bbl.phdthesis format.thesis.type output.nonnull
   school "school" output.check
   address output
