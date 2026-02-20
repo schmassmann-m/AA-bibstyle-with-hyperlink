@@ -1316,13 +1316,28 @@ FUNCTION {techreport}
   fin.entry
 }
 
+FUNCTION {format.stack.colorlink}
+{ adsurl empty$
+    { doi empty$
+        { url empty$
+            'skip$
+            { "\href{" url * "}{\color{red}" * swap$ * "}" }
+          if$
+		}
+        { "\href{" doi * "}{\color{magenta}" * swap$ * "}" }
+      if$
+	}
+    { "\href{" adsurl * "}{\color{blue}" * swap$ * "}" }
+  if$
+}
+
 FUNCTION {unpublished}
 { output.bibitem
   format.authors "author" output.check
   author format.key output
   format.date "year" output.check
   date.block
-  format.note "note" output.check
+  format.note format.stack.colorlink "note" output.check
   fin.entry
 }
 
