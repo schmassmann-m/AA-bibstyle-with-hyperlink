@@ -1321,13 +1321,13 @@ FUNCTION {format.stack.colorlink}
     { doi empty$
         { url empty$
             'skip$
-            { "\href{" url * "}{\color{red}" * swap$ * "}" }
+            { "\href{" url * "}{\color{red}" * swap$ * "}" * }
           if$
 		}
-        { "\href{" doi * "}{\color{magenta}" * swap$ * "}" }
+        { "\href{" doi * "}{\color{magenta}" * swap$ * "}" * }
       if$
 	}
-    { "\href{" adsurl * "}{\color{blue}" * swap$ * "}" }
+    { "\href{" adsurl * "}{\color{blue}" * swap$ * "}" * }
   if$
 }
 
