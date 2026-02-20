@@ -1233,15 +1233,44 @@ FUNCTION {format.phdtitle}
   if$
 }
 
+FUNCTION {format.phdtitle.optional}
+{ title empty$ not
+  adsurl empty$ and
+  doi empty$ and
+  url empty$ and
+  { title }
+  { "" }
+}
+
+FUNCTION {format.thesis.type.colorlink} %type on stack
+{ doi empty$
+  { adsurl empty$
+    url empty$ not and
+      { "\href{" url * "}{\color{red}" * swap$ * "}" * }
+      'skip
+    if$
+  }
+  { "\href{http://dx.doi.org/" doi * "}{\color{magenta}" * swap$ * "}" * }
+  if$
+}
+
+FUNCTION {format.school}
+{ school duplicate$ empty$
+  adsurl empty$ or
+    'skip
+    { "\href{" adsurl * "}{\color{blue}" * swap$ * "}" * }
+  if$
+}
+
 FUNCTION {phdthesis}
 { output.bibitem
   format.authors "author" output.check
   author format.key output
   format.date "year" output.check
   date.block
-  format.phdtitle output 
-  bbl.phdthesis format.thesis.type output.nonnull
-  school "school" output.check
+  format.phdtitle.optional output 
+  bbl.phdthesis format.thesis.type format.thesis.type.colorlink output.nonnull
+  format.school "school" output.check
   address output
   format.note output
   fin.entry
