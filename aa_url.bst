@@ -1225,7 +1225,7 @@ FUNCTION {misc}
 FUNCTION {format.phdtitle}
 { title empty$
     { "" }
-    { doi empty$
+    { adsurl empty$
         { title }
         { "\href{" adsurl * "}{\color{magenta}" * title * "}" * }
       if$
