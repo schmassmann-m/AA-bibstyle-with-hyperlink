@@ -1238,8 +1238,9 @@ FUNCTION {format.phdtitle.optional}
   adsurl empty$ and
   doi empty$ and
   url empty$ and
-  { title }
-  { "" }
+    { title }
+    { "" }
+  if$
 }
 
 FUNCTION {format.thesis.type.colorlink} %type on stack
@@ -1247,7 +1248,7 @@ FUNCTION {format.thesis.type.colorlink} %type on stack
   { adsurl empty$
     url empty$ not and
       { "\href{" url * "}{\color{red}" * swap$ * "}" * }
-      'skip
+      'skip$
     if$
   }
   { "\href{http://dx.doi.org/" doi * "}{\color{magenta}" * swap$ * "}" * }
@@ -1257,7 +1258,7 @@ FUNCTION {format.thesis.type.colorlink} %type on stack
 FUNCTION {format.school}
 { school duplicate$ empty$
   adsurl empty$ or
-    'skip
+    'skip$
     { "\href{" adsurl * "}{\color{blue}" * swap$ * "}" * }
   if$
 }
