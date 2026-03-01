@@ -300,7 +300,7 @@ FUNCTION {bbl.mthesis}
 { "Master's thesis" }
 
 FUNCTION {bbl.phdthesis}
-{ "PhD thesis" }
+{ "Ph.D. Thesis" }
 
 FUNCTION {bbl.first}
 { "1st" }
