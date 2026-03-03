@@ -1006,8 +1006,14 @@ FUNCTION {format.ed.booktitle}
   { "no book title in " cite$ * warning$ "" pop$ }
   { editor empty$
     author empty$ or
-      'format.edn.btitle
-      { format.edn.btitle ", " * bbl.editor * " " * format.in.editors * }
+        'format.edn.btitle
+        { format.edn.btitle ", " * 
+          editor num.names$ #1 >
+            { bbl.editors }
+            { bbl.editor }
+          if$
+          * " " * format.in.editors * 
+        }
       if$
   }
   if$
