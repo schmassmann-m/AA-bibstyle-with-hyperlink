@@ -1691,6 +1691,8 @@ FUNCTION {begin.bib}
   write$ newline$
   "\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi"
   write$ newline$
+  "\makeatletter\@ifundefined{iflatexml}{\newif\iflatexml\latexmlfalse}{}\makeatother" write$ newline$
+  "\iflatexml\else\hyphenpenalty=10000\fi" write$ newline$
 }
 
 EXECUTE {begin.bib}
