@@ -577,7 +577,7 @@ FUNCTION {format.eprint}
         'skip$
         { "[" * 
           archiveprefix "l" change.case$ "arxiv" =
-            { "\href{https://arxiv.org/abs/" eprint * "}{\textcolor{magenta}{" * archiveprefix * "}}" * }
+            { "\href{https://arxiv.org/abs/" eprint * "}{\textcolor{aa_url_doi}{" * archiveprefix * "}}" * }
             { archiveprefix }
           if$
           * "]" * }
@@ -585,7 +585,7 @@ FUNCTION {format.eprint}
       "{" * 
       adsurl empty$
         { swap$ *}
-        { "\href{" * adsurl * "}{\textcolor{blue}{" *
+        { "\href{" * adsurl * "}{\textcolor{aa_url_ads}{" *
           swap$ *
           "}}" *
         }
@@ -1093,7 +1093,7 @@ FUNCTION {format.full.book.spec}
 
 FUNCTION {make.href.hyperref}
 {
-  "\href{" swap$ * "}{" * swap$ * "}" * 
+  "\href{" swap$ * "}{\color{aa_url_ads}" * swap$ * "}" * 
 }
 
 FUNCTION {format.journal}
@@ -1101,7 +1101,7 @@ FUNCTION {format.journal}
     { "" }
     { doi empty$
         { journal }
-        { "\href{http://dx.doi.org/" doi * "}{\color{magenta}" * journal * "}" * }
+        { "\href{http://dx.doi.org/" doi * "}{\color{aa_url_doi}" * journal * "}" * }
       if$
     }
   if$
@@ -1268,7 +1268,7 @@ FUNCTION {format.phdtitle}
     { "" }
     { adsurl empty$
         { title }
-        { "\href{" adsurl * "}{\color{magenta}" * title * "}" * }
+        { "\href{" adsurl * "}{\color{aa_url_doi}" * title * "}" * }
       if$
     }
   if$
@@ -1288,11 +1288,11 @@ FUNCTION {format.thesis.type.colorlink} %type on stack
 { doi empty$
   { adsurl empty$
     url empty$ not and
-      { "\href{" url * "}{\color{red}" * swap$ * "}" * }
+      { "\href{" url * "}{\color{aa_url_url}" * swap$ * "}" * }
       'skip$
     if$
   }
-  { "\href{http://dx.doi.org/" doi * "}{\color{magenta}" * swap$ * "}" * }
+  { "\href{http://dx.doi.org/" doi * "}{\color{aa_url_doi}" * swap$ * "}" * }
   if$
 }
 
@@ -1300,7 +1300,7 @@ FUNCTION {format.school}
 { school duplicate$ empty$
   adsurl empty$ or
     'skip$
-    { "\href{" adsurl * "}{\color{blue}" * swap$ * "}" * }
+    { "\href{" adsurl * "}{\color{aa_url_ads}" * swap$ * "}" * }
   if$
 }
 
@@ -1362,13 +1362,13 @@ FUNCTION {format.stack.colorlink}
     { doi empty$
         { url empty$
             'skip$
-            { "\href{" url * "}{\color{red}" * swap$ * "}" * }
+            { "\href{" url * "}{\color{aa_url_url}" * swap$ * "}" * }
           if$
 		}
-        { "\href{" doi * "}{\color{magenta}" * swap$ * "}" * }
+        { "\href{" doi * "}{\color{aa_url_doi}" * swap$ * "}" * }
       if$
 	}
-    { "\href{" adsurl * "}{\color{blue}" * swap$ * "}" * }
+    { "\href{" adsurl * "}{\color{aa_url_ads}" * swap$ * "}" * }
   if$
 }
 
@@ -1734,6 +1734,9 @@ FUNCTION {begin.bib}
   write$ newline$
   "\makeatletter\@ifundefined{iflatexml}{\newif\iflatexml\latexmlfalse}{}\makeatother" write$ newline$
   "\iflatexml\else\hyphenpenalty=10000\fi" write$ newline$
+  "\providecolor{aa_url_ads}{named}{blue}" write$ newline$
+  "\providecolor{aa_url_doi}{named}{magenta}" write$ newline$
+  "\providecolor{aa_url_url}{named}{red}" write$ newline$
 }
 
 EXECUTE {begin.bib}
