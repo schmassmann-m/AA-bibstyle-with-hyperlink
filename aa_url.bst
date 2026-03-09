@@ -1737,6 +1737,7 @@ FUNCTION {begin.bib}
   "\providecolor{aa_url_ads}{named}{blue}" write$ newline$
   "\providecolor{aa_url_doi}{named}{magenta}" write$ newline$
   "\providecolor{aa_url_url}{named}{red}" write$ newline$
+  \providecommand{\eprint}[2][]{{\tt\if!#1!#2\else#1:\ignorespaces#2\fi}}
 }
 
 EXECUTE {begin.bib}
